@@ -7,6 +7,14 @@ import (
 	"github.com/gorilla/mux"
 )
 
+const (
+	host     = "192.168.1.10"
+	port     = 5432
+	user     = "postgres"
+	password = "mydb123"
+	dbname   = "learngo"
+)
+
 func helloUser(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Hello user using Gorilla!")
 }
