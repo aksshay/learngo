@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
+	"github.com/aksshay/learngo/controllers"
 	"github.com/gorilla/mux"
 )
 
@@ -15,15 +15,17 @@ const (
 	dbname   = "learngo"
 )
 
-func helloUser(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Hello user using Gorilla!")
-}
-
 func main() {
 
 	r := mux.NewRouter()
+	userCtrl := controllers.NewUsers()
 
-	r.HandleFunc("/hello", helloUser)
+	userAPI := "/api/users/"
+
+	r.HandleFunc(userAPI+"create", userCtrl.Create).Methods("POST")
+	r.HandleFunc(userAPI+"get", userCtrl.Read).Methods("GET")
+	r.HandleFunc(userAPI+"update", userCtrl.Update).Methods("PUT")
+	r.HandleFunc(userAPI+"delete", userCtrl.Delete).Methods("DELETE")
 
 	must(http.ListenAndServe(":8080", r))
 }
