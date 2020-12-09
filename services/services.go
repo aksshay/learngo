@@ -1,6 +1,9 @@
 package services
 
 import (
+	"crypto/md5"
+	"encoding/hex"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -14,4 +17,14 @@ func DBConnection(dataSource string) (*gorm.DB, error) {
 	}
 
 	return gormDB, nil
+}
+
+//GenerateMD5 This service is used to generate MD5 of a string
+func GenerateMD5(text string) (string, error) {
+	hasher := md5.New()
+	_, err := hasher.Write([]byte(text))
+	if err != nil {
+		return "", nil
+	}
+	return hex.EncodeToString(hasher.Sum(nil)), nil
 }

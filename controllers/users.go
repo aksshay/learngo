@@ -35,7 +35,7 @@ func (u *Users) Create(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			panic(err)
 		}
-		msg := fmt.Sprint("User with id: %u created successfully!", id)
+		msg := fmt.Sprintf("User with id: %d created successfully!\n", id)
 		fmt.Fprintln(w, msg)
 	}
 	// user := models.User{

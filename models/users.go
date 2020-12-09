@@ -3,6 +3,7 @@ package models
 import (
 	"errors"
 
+	"github.com/aksshay/learngo/services"
 	"gorm.io/gorm"
 )
 
@@ -19,6 +20,11 @@ type User struct {
 //CreateUser will connect to the database and return whether the user is created
 //successfully or not
 func (u *User) CreateUser(db *gorm.DB) (uint, error) {
+	pass, err := services.GenerateMD5(u.Password)
+	if err != nil {
+		return 0, errors.New("Unable to generate hash")
+	}
+	u.Password = pass
 	result := db.Create(u)
 	if result.RowsAffected == 1 {
 		return u.ID, nil
