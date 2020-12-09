@@ -19,9 +19,10 @@ CREATE TABLE IF NOT EXISTS users  (
     user_name   varchar(25) NOT NULL,
     first_name  varchar(20) NOT NULL,
     last_name   varchar(20),
-    password    varchar(20),
+    password    varchar(50),
     email       varchar(60)
     created_at  timestamp DEFAULT current_timestamp,
+    updated_at  timestamp DEFAULT current_timestamp,
     deleted_at  timestamp DEFAULT current_timestamp
 );
 ```
