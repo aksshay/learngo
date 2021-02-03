@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/aksshay/learngo/models"
+	"../models"
 	"github.com/gorilla/mux"
 	"gorm.io/gorm"
 )

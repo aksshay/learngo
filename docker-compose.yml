@@ -19,3 +19,17 @@ services:
       - ./data/db:/docker-entrypoint-initdb.d/
     ports:
       - 5432:5432
+    networks: 
+      - learngonet
+  
+  user: 
+    restart: always
+    build: ./user
+    ports: 
+      - 18080:8080
+    networks: 
+      - learngonet
+    
+networks:
+  learngonet:
+    driver: bridge

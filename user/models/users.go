@@ -3,7 +3,7 @@ package models
 import (
 	"errors"
 
-	"github.com/aksshay/learngo/services"
+	"../services"
 	"gorm.io/gorm"
 )
 

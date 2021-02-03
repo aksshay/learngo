@@ -3,13 +3,13 @@ package main
 import (
 	"net/http"
 
-	"github.com/aksshay/learngo/controllers"
-	"github.com/aksshay/learngo/services"
+	"./controllers"
+	"./services"
 	"github.com/gorilla/mux"
 )
 
 const (
-	host     = "192.168.1.10"
+	host     = "0.0.0.0"
 	port     = "5432"
 	user     = "postgres"
 	password = "mydb123"
