@@ -2,18 +2,19 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"./controllers"
 	"./services"
 	"github.com/gorilla/mux"
 )
 
-const (
-	host     = "0.0.0.0"
-	port     = "5432"
-	user     = "postgres"
-	password = "mydb123"
-	dbname   = "learngo"
+var (
+	host     = readEnv("DBHOST")
+	port     = readEnv("DBPORT")
+	user     = readEnv("DBUSER")
+	password = readEnv("DBPASSWORD")
+	dbname   = readEnv("DBNAME")
 )
 
 func main() {
@@ -41,4 +42,12 @@ func must(err error) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func readEnv(env string) string {
+	value := os.Getenv(env)
+	if value == "" {
+		panic("failed to read environment variable")
+	}
+	return value
 }

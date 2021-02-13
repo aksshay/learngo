@@ -2,6 +2,7 @@ version: '3'
 
 services:
   postgres:
+    container_name: postgresonfly
     image: postgres:12.5
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
@@ -19,17 +20,28 @@ services:
       - ./data/db:/docker-entrypoint-initdb.d/
     ports:
       - 5432:5432
-    networks: 
-      - learngonet
+    # networks: 
+    #   - learngonet
   
   user: 
+    container_name: userservice
     restart: always
+    environment: 
+      - DBHOST=postgresonfly
+      - DBPORT=5432
+      - DBUSER=postgres
+      - DBPASSWORD=mydb123
+      - DBNAME=learngo
     build: ./user
     ports: 
-      - 18080:8080
-    networks: 
-      - learngonet
+      - 8080:8080
+    expose: 
+      - 8080
+    links: 
+      - postgres
+#     networks: 
+#       - learngonet
     
-networks:
-  learngonet:
-    driver: bridge
+# networks:
+#   learngonet:
+#     driver: bridge
